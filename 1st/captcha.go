@@ -20,7 +20,7 @@ func main() {
 func CalculateSum(sequence string) uint64 {
 	var sum uint64;
 	for i := range sequence {
-		j, err := getNextElement(i, len(sequence))
+		j, err := getNextElement(i, len(sequence), 1)
 		if err != nil {
 			return 0
 		}
@@ -36,14 +36,10 @@ func CalculateSum(sequence string) uint64 {
 	return sum;
 }
 
-func getNextElement(currentIndex, lenghtSequence int) (int, error) {
+func getNextElement(currentIndex, lenghtSequence, step int) (int, error) {
 	if currentIndex >= lenghtSequence {
 		return 0, errors.New("Invalid parameters") 
 	}
 
-	if currentIndex + 1 == lenghtSequence {
-		return 0, nil
-	} else {
-		return currentIndex + 1, nil
-	}
+	return (currentIndex + step) % lenghtSequence, nil
 }

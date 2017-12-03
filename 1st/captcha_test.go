@@ -6,31 +6,49 @@ import (
 )
 
 func TestGetNextElementFuncInvalidIndex(t *testing.T) {
-	i, e := getNextElement(0, 0)
+	i, e := getNextElement(0, 0, 1)
 	assert.Equal(t, 0, i)
 	assert.NotEqual(t, nil, e)
 }
 
 func TestGetNextElementFuncInvalidSize(t *testing.T) {
-	i, e := getNextElement(0, -1)
+	i, e := getNextElement(0, -1, 1)
 	assert.Equal(t, 0, i)
 	assert.NotEqual(t, nil, e)
 }
 
 func TestGetNextElementFuncOverflow(t *testing.T) {
-	i, e := getNextElement(2, 2)
+	i, e := getNextElement(2, 2, 1)
 	assert.Equal(t, 0, i)
 	assert.NotEqual(t, nil, e)
 }
 
 func TestGetNextElementFuncSimple(t *testing.T) {
-	i, e := getNextElement(0, 2)
+	i, e := getNextElement(0, 2, 1)
 	assert.Equal(t, 1, i)
 	assert.Equal(t, nil, e)
 }
 
-func TestGetNextElementFuncCircular(t *testing.T) {
-	i, e := getNextElement(1, 2)
+func TestGetNextElementFuncTwoSteps(t *testing.T) {
+	i, e := getNextElement(0, 4, 2)
+	assert.Equal(t, 2, i)
+	assert.Equal(t, nil, e)
+}
+
+func TestGetNextElementFuncCircularListOneStep(t *testing.T) {
+	i, e := getNextElement(1, 2, 1)
+	assert.Equal(t, 0, i)
+	assert.Equal(t, nil, e)
+}
+
+func TestGetNextElementFuncCircularListTwoSteps(t *testing.T) {
+	i, e := getNextElement(1, 2, 2)
+	assert.Equal(t, 1, i)
+	assert.Equal(t, nil, e)
+}
+
+func TestGetNextElementFuncCircularListThreeSteps(t *testing.T) {
+	i, e := getNextElement(1, 2, 3)
 	assert.Equal(t, 0, i)
 	assert.Equal(t, nil, e)
 }
