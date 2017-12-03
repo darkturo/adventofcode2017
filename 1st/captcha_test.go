@@ -5,6 +5,40 @@ import (
 	"testing"
 )
 
+func TestGetNextElementFuncInvalidIndex(t *testing.T) {
+	i, e := getNextElement(0, 0)
+	assert.Equal(t, 0, i)
+	assert.NotEqual(t, nil, e)
+}
+
+func TestGetNextElementFuncInvalidSize(t *testing.T) {
+	i, e := getNextElement(0, -1)
+	assert.Equal(t, 0, i)
+	assert.NotEqual(t, nil, e)
+}
+
+func TestGetNextElementFuncOverflow(t *testing.T) {
+	i, e := getNextElement(2, 2)
+	assert.Equal(t, 0, i)
+	assert.NotEqual(t, nil, e)
+}
+
+func TestGetNextElementFuncSimple(t *testing.T) {
+	i, e := getNextElement(0, 2)
+	assert.Equal(t, 1, i)
+	assert.Equal(t, nil, e)
+}
+
+func TestGetNextElementFuncCircular(t *testing.T) {
+	i, e := getNextElement(1, 2)
+	assert.Equal(t, 0, i)
+	assert.Equal(t, nil, e)
+}
+
+func TestInvalidSequence(t *testing.T) {
+	assert.Equal(t, uint64(0), CalculateSum("02k3"))
+}
+
 func TestEmptySequence(t *testing.T) {
 	assert.Equal(t, uint64(0), CalculateSum(""))
 }

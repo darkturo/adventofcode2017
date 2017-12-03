@@ -5,6 +5,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -19,11 +20,15 @@ func main() {
 func CalculateSum(sequence string) uint64 {
 	var sum uint64;
 	for i := range sequence {
-		j := getNextElement(i, len(sequence))
+		j, err := getNextElement(i, len(sequence))
+		if err != nil {
+			return 0
+		}
 		if sequence[i] == sequence[j] {
 			digit, err := strconv.ParseUint(string(sequence[i]), 10, 64)
 			if err != nil {
-				panic(fmt.Sprintf("Invalid input: '%s'", sequence))
+				fmt.Printf("Invalid input: '%s'", sequence)
+				return 0
 			}
 			sum = sum + digit
 		}
@@ -31,10 +36,14 @@ func CalculateSum(sequence string) uint64 {
 	return sum;
 }
 
-func getNextElement(currentIndex, lenghtSequence int) int {
+func getNextElement(currentIndex, lenghtSequence int) (int, error) {
+	if currentIndex >= lenghtSequence {
+		return 0, errors.New("Invalid parameters") 
+	}
+
 	if currentIndex + 1 == lenghtSequence {
-		return 0
+		return 0, nil
 	} else {
-		return currentIndex + 1
+		return currentIndex + 1, nil
 	}
 }
