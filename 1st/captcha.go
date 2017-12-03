@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	for i := range os.Args[1:] {
+	for i := 1; i < len(os.Args); i++ {
 		fmt.Println(CalculateSum(os.Args[i]))
 	}
 }
@@ -27,7 +27,7 @@ func CalculateSum(sequence string) uint64 {
 		if sequence[i] == sequence[j] {
 			digit, err := strconv.ParseUint(string(sequence[i]), 10, 64)
 			if err != nil {
-				fmt.Printf("Invalid input: '%s'", sequence)
+				fmt.Printf("Invalid input: '%s'\n", sequence)
 				return 0
 			}
 			sum = sum + digit
