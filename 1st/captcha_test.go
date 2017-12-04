@@ -54,53 +54,73 @@ func TestGetNextElementFuncCircularListThreeSteps(t *testing.T) {
 }
 
 func TestInvalidSequence(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum("02k3"))
+	assert.Equal(t, uint64(0), CalculateSum("02k3", 1))
 }
 
 func TestEmptySequence(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum(""))
+	assert.Equal(t, uint64(0), CalculateSum("", 1))
 }
 
 func TestSequenceOfZeros(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum("0000"))
+	assert.Equal(t, uint64(0), CalculateSum("0000", 1))
 }
 
 func TestSequenceWithOneElement(t *testing.T) {
-	assert.Equal(t, uint64(1), CalculateSum("1"))
+	assert.Equal(t, uint64(1), CalculateSum("1", 1))
 }
 
 func TestSequenceWithTwoDistinctNumbers(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum("01"))
+	assert.Equal(t, uint64(0), CalculateSum("01", 1))
 }
 
 func TestSequenceWithTwoNonZeroEqualNumbers(t *testing.T) {
-	assert.Equal(t, uint64(2), CalculateSum("11"))
+	assert.Equal(t, uint64(2), CalculateSum("11", 1))
 }
 
 func TestSequenceWithThreeDistinctNumbers(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum("012"))
+	assert.Equal(t, uint64(0), CalculateSum("012", 1))
 }
 
 func TestSequenceWithThreeNonZeroEqualNumbers(t *testing.T) {
-	assert.Equal(t, uint64(3), CalculateSum("111"))
+	assert.Equal(t, uint64(3), CalculateSum("111", 1))
 }
 
 func TestSequenceWithTwoConsecutives(t *testing.T) {
-	assert.Equal(t, uint64(1), CalculateSum("011"))
+	assert.Equal(t, uint64(1), CalculateSum("011", 1))
 }
 
 func TestExample1122(t *testing.T) {
-	assert.Equal(t, uint64(3), CalculateSum("1122"))
+	assert.Equal(t, uint64(3), CalculateSum("1122", 1))
 }
 
 func TestExample1111(t *testing.T) {
-	assert.Equal(t, uint64(4), CalculateSum("1111"))
+	assert.Equal(t, uint64(4), CalculateSum("1111", 1))
 }
 
 func TestExample1234(t *testing.T) {
-	assert.Equal(t, uint64(0), CalculateSum("1234"))
+	assert.Equal(t, uint64(0), CalculateSum("1234", 1))
 }
 
 func TestExample91212129(t *testing.T) {
-	assert.Equal(t, uint64(9), CalculateSum("91212129"))
+	assert.Equal(t, uint64(9), CalculateSum("91212129", 1))
+}
+
+func TestExample1212(t *testing.T) {
+	assert.Equal(t, uint64(6), CalculateSum("1212", calculateStep("1212")))
+}
+
+func TestExample1221(t *testing.T) {
+	assert.Equal(t, uint64(0), CalculateSum("1221", calculateStep("1221")))
+}
+
+func TestExample123425(t *testing.T) {
+	assert.Equal(t, uint64(4), CalculateSum("123425", calculateStep("123425")))
+}
+
+func TestExample123123(t *testing.T) {
+	assert.Equal(t, uint64(12), CalculateSum("123123", calculateStep("123123")))
+}
+
+func TestExample12131415(t *testing.T) {
+	assert.Equal(t, uint64(4), CalculateSum("12131415", calculateStep("12131415")))
 }
